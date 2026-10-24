@@ -1,0 +1,299 @@
+export interface SeedProject {
+  id: number;
+  title: string;
+  category: string;
+  badge: string;
+  description: string;
+  longDescription: string;
+  tags: string[];
+  metrics: string;
+  github: string;
+  live: string;
+  status: string;
+  year: string;
+}
+
+export interface SeedExperience {
+  id: number;
+  year: string;
+  company: string;
+  role: string;
+  location: string;
+  badge: string;
+  color: string;
+  bullets: string[];
+}
+
+export interface SeedSkillCategory {
+  key: string;
+  title: string;
+  skills: string[];
+}
+
+export interface SeedFaq {
+  id: number;
+  q: string;
+  a: string;
+  tags: string[];
+}
+
+export interface SeedActivity {
+  id: number;
+  location: string;
+  icon: string;
+  text: string;
+  timeAgo: string;
+}
+
+export const INITIAL_PROFILE = {
+  name: 'Toluwanimi Davis',
+  title: 'Frontend-focused Full-Stack Lead',
+  bio: '4+ years delivering scalable, production-grade web applications for clients across UAE, Nigeria, and remote teams. Specialized in React/TypeScript, Node.js microservices, 3D WebGL telemetry, and AI/LLM integrations.',
+  os: 'ToluOS 4.2.0 Ultra (x86_64-darwin)',
+  host: 'Remote / UAE · Nigeria Workstation',
+  experience_years: 4,
+  mau_supported: 100000,
+  shell: 'zsh 5.9 (tmux: ultra)',
+  core_stack: 'React, Next.js, Node.js, TypeScript, Three.js, AI/LLM',
+  contact_email: 'durojaiyetoluwani@gmail.com',
+  contact_phone: '+234 806 983 8501',
+  status: '● Available for Work',
+  location: 'Dubai, UAE · Lagos, Nigeria · Remote',
+  github: 'https://github.com/davistolu'
+};
+
+export const INITIAL_PROJECTS: SeedProject[] = [
+  {
+    id: 1,
+    title: 'RIAUM — AI Mental Wellness Platform',
+    category: 'ai',
+    badge: 'PROD LIVE',
+    description: 'Full-stack mental wellness ecosystem with real-time mood tracking, AI mindfulness generation, and Recharts telemetry.',
+    longDescription: 'MERN stack + TypeScript production platform with sub-2s initial load time, JWT/RBAC security, and LLM API personalized wellness generator.',
+    tags: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Recharts', 'Gemini Pro / LLM', 'JWT'],
+    metrics: 'Sub-2s page load · 100% Type-safe · Real-time charts',
+    github: 'https://github.com/davistolu/Riaum-backend',
+    live: 'https://r-iaum.vercel.app/',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    id: 2,
+    title: 'WireBridge — Polyglot Runtime API Engine',
+    category: 'devtools',
+    badge: 'PROD FRAMEWORK',
+    description: 'Runtime framework that automatically connects frontends to backends across Python, TypeScript, Go, Ruby, and Laravel.',
+    longDescription: 'Production-grade runtime wiring layer that resolves frontend intents to backend capabilities with convention scoring and Claude fallback.',
+    tags: ['TypeScript', 'Node.js', 'Python', 'Go', 'Ruby', 'PHP', 'React', 'SSE', 'AES-256'],
+    metrics: 'Zero manual endpoints · SQLite/PostgreSQL store · SSE stream',
+    github: 'https://github.com/davistolu/autobridge',
+    live: 'https://github.com/davistolu/autobridge',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    id: 3,
+    title: 'Twin Turbine 3D Simulator',
+    category: '3d',
+    badge: '3D WEBGL SIM',
+    description: 'Real-time 3D digital twin of a dual wind turbine production plant with physics simulation and telemetry panels.',
+    longDescription: 'High-fidelity React Three Fiber simulation modeling turbine physics, RPM, torque, and fault injection anomaly scenarios in real time.',
+    tags: ['React Three Fiber', 'Three.js', 'TypeScript', 'Recharts', 'Physics Sim', 'WebGL'],
+    metrics: '60 FPS WebGL · Real-time physics · Telemetry dashboard',
+    github: 'https://github.com/davistolu/twin-turbine-sim',
+    live: 'https://plant-simulator.netlify.app/',
+    status: 'live',
+    year: '2026',
+  },
+  {
+    id: 4,
+    title: 'Swarm Intelligence 3D Simulator',
+    category: '3d',
+    badge: 'MULTI-AGENT SIM',
+    description: 'Animated 3D production line dashboard simulating autonomous swarm agent behavior with custom Three.js pipelines.',
+    longDescription: 'Interactive 3D simulation of multi-agent swarm algorithms with real-time data viz and blueprint reporting.',
+    tags: ['React Three Fiber', 'TypeScript', 'Three.js', 'Recharts', 'Python'],
+    metrics: 'Custom Three.js shader · Autonomous agent logic',
+    github: 'https://github.com/davistolu/swarm-intelligence-proj',
+    live: 'https://swarm-intelli.netlify.app/',
+    status: 'live',
+    year: '2024',
+  },
+  {
+    id: 5,
+    title: 'AI Financial Assistant Chatbot',
+    category: 'ai',
+    badge: 'FINTECH & NLP',
+    description: 'AI-powered personal finance assistant with budget tracking and natural-language advice via Gemini Pro.',
+    longDescription: 'Architecture migration from GPT-3.5 to Flask + Gemini Pro API, achieving 35% latency cut and 50% API cost reduction.',
+    tags: ['React', 'Flask', 'Gemini Pro API', 'Python', 'AI/ML'],
+    metrics: '35% Latency cut · 50% API cost saved · Natural chat',
+    github: 'https://github.com/davistolu/financial-assistant-chatbot',
+    live: 'https://financial-assistant-chatbot.netlify.app/',
+    status: 'live',
+    year: '2024',
+  },
+  {
+    id: 6,
+    title: 'Freelancer Pricing & Escrow Marketplace',
+    category: 'fullstack',
+    badge: 'FINTECH ESCROW',
+    description: 'Freelancer platform with dual payment gateway (Paystack & PayPal), WebSockets messaging, and subscription tiers.',
+    longDescription: 'Full marketplace architecture with JWT authentication, RBAC, webhook payment listeners, and real-time chat.',
+    tags: ['React', 'Node.js', 'Socket.io', 'Paystack', 'PayPal', 'MongoDB'],
+    metrics: 'Dual Gateway · Real-time WebSockets · RBAC Auth',
+    github: 'https://github.com/davistolu/freelance-earn',
+    live: '',
+    status: 'in-progress',
+    year: '2024',
+  },
+  {
+    id: 7,
+    title: 'Blockchain E-Voting Platform',
+    category: 'fullstack',
+    badge: 'WEB3 & GOV',
+    description: 'Decentralized voting system with Ethereum blockchain smart contracts for immutable, tamper-proof ballot recording.',
+    longDescription: 'Cryptographic voter identity verification, on-chain vote immutability, and real-time auditable election tallies.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Blockchain', 'Web3.js'],
+    metrics: 'Immutable on-chain storage · Zero tampering',
+    github: 'https://github.com/davistolu/blockchain-e-voting-system',
+    live: '',
+    status: 'in-progress',
+    year: '2024',
+  },
+];
+
+export const INITIAL_EXPERIENCES: SeedExperience[] = [
+  {
+    id: 1,
+    year: '2025–2026',
+    company: 'eJaby by Tekeya (Dubai, UAE · Remote Contract)',
+    role: 'Frontend Developer',
+    location: 'Dubai, UAE',
+    badge: 'Fintech & Scale',
+    color: '#38bdf8',
+    bullets: [
+      'Engineered complete UI with React & TypeScript — sub-2s initial load time.',
+      'Architected multi-gateway payment (Stripe, Apple Pay, Google Pay) cutting drop-off 30%.',
+      'Performance optimizations lifted Core Web Vitals by 40%.',
+      'Resolved 60% of backlog through reusable design system architecture.',
+    ],
+  },
+  {
+    id: 2,
+    year: '2023–PRES',
+    company: 'ByTeom Technologies (Lagos, Nigeria)',
+    role: 'Principal Full-Stack Developer',
+    location: 'Lagos, Nigeria',
+    badge: 'Full-Stack & AI',
+    color: '#22c55e',
+    bullets: [
+      'Architected full-stack features using React, Node.js, Next.js, PostgreSQL and MongoDB.',
+      'Built AI workflow automation modules integrating LLM APIs — 45% manual processing cut.',
+      'Implemented secure RESTful APIs with JWT & RBAC supporting 10,000+ MAU.',
+      'Owned CI/CD pipelines & DevOps — 25% reduction in release cycle time.',
+    ],
+  },
+  {
+    id: 3,
+    year: '2023–2025',
+    company: 'Google Developer Groups (ACU)',
+    role: 'Technical Co-Lead',
+    location: 'Oyo / Lagos, Nigeria',
+    badge: 'Leadership & GDG',
+    color: '#f59e0b',
+    bullets: [
+      'Co-led 200+ member developer community; mentored 30+ students into engineering roles.',
+      'Spearheaded TechUp Summit attracting 150+ attendees with industry sponsors.',
+    ],
+  },
+  {
+    id: 4,
+    year: '2020–2023',
+    company: 'DoubleTon Solutions (Abuja, Nigeria)',
+    role: 'Software Engineering Intern',
+    location: 'Abuja, Nigeria',
+    badge: 'Origin & Growth',
+    color: '#4ade80',
+    bullets: [
+      'Contributed full-stack features in React + Node.js/Express.',
+      'Optimized MongoDB & SQL queries — 35% speed improvement on high-traffic endpoints.',
+    ],
+  },
+];
+
+export const INITIAL_SKILLS: SeedSkillCategory[] = [
+  {
+    key: 'frontend_3d',
+    title: 'Frontend & 3D Engineering',
+    skills: ['React.js', 'Next.js', 'TypeScript', 'React Three Fiber (3D)', 'Three.js', 'Tailwind CSS', 'Recharts', 'Framer Motion'],
+  },
+  {
+    key: 'backend_apis',
+    title: 'Backend & Polyglot APIs',
+    skills: ['Node.js', 'Nest.js', 'Express.js', 'Python (Flask)', 'RESTful APIs', 'WebSockets (Socket.io)', 'GraphQL', 'JWT / RBAC'],
+  },
+  {
+    key: 'ai_llm_systems',
+    title: 'AI & LLM Integration',
+    skills: ['Gemini Pro API', 'OpenAI API', 'DeepSeek', 'Prompt Engineering', 'AI Agent Workflows', 'Claude / Cursor'],
+  },
+  {
+    key: 'databases',
+    title: 'Databases & Storage',
+    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Firebase', 'Redis', 'SQLite'],
+  },
+  {
+    key: 'fintech_payments',
+    title: 'Fintech & Payment Gateways',
+    skills: ['Stripe', 'Apple Pay', 'Google Pay', 'Paystack', 'PayPal'],
+  },
+  {
+    key: 'devops_cloud',
+    title: 'DevOps & Cloud Infrastructure',
+    skills: ['Docker', 'GitHub Actions CI/CD', 'AWS (S3, EC2)', 'Vercel', 'Netlify'],
+  },
+];
+
+export const INITIAL_FAQS: SeedFaq[] = [
+  {
+    id: 1,
+    q: 'How did you cut checkout drop-off by 30% at eJaby Dubai?',
+    a: 'At eJaby by Tekeya in Dubai, I re-architected the entire multi-gateway payment flow using React and TypeScript. I introduced Apple Pay, Google Pay, and Stripe with instant validation, optimistic UI updates, and intelligent fallback retry logic for failed transactions, reducing cart abandonment from 48% to 18%.',
+    tags: ['Fintech', 'React', 'Payments', 'Dubai UAE'],
+  },
+  {
+    id: 2,
+    q: 'What is your architectural approach to Frontend & Full-Stack performance?',
+    a: 'I prioritize sub-2s initial load and sub-16ms render frames. My core approach combines strict TypeScript typing, route-based code splitting, memoized state trees, skeleton load states, and Web Workers for heavy data processing. In Node.js backends, I optimize database index paths and enforce structured logging with JWT/RBAC security.',
+    tags: ['Performance', 'TypeScript', 'Node.js', 'Core Web Vitals'],
+  },
+  {
+    id: 3,
+    q: 'Can you work across UAE, US, and European timezones?',
+    a: 'Yes, 100%. Having delivered client work across Dubai (GST, UTC+4), the UK (GMT), Nigeria (WAT, UTC+1), and US remote teams, I maintain overlapping working hours with asynchronous documentation rigor, daily standups, and clear sprint milestones.',
+    tags: ['Remote', 'Availability', 'Global Teams'],
+  },
+  {
+    id: 4,
+    q: 'What did you achieve as Google Developer Groups Technical Co-Lead?',
+    a: 'I led a 200+ member developer community at ACU, teaching hands-on React, Node.js, and API architecture bootcamps. I personally mentored 30+ students directly into junior engineering internships and freelance contracts, and spearheaded our 150+ attendee TechUp Summit.',
+    tags: ['Leadership', 'Community', 'Mentorship', 'GDG'],
+  },
+  {
+    id: 5,
+    q: 'What are your salary / contract rate expectations?',
+    a: 'I am open to competitive full-time roles, contract-to-hire, or high-impact freelance engineering projects. Feel free to send a message via ~/contact.sh or email durojaiyetoluwani@gmail.com to discuss project scopes and compensation.',
+    tags: ['Hiring', 'Contracts', 'Rates'],
+  },
+];
+
+export const INITIAL_ACTIVITIES: SeedActivity[] = [
+  { id: 1, location: 'Tokyo, JP', icon: '🇯🇵', text: 'cyber_node_81 ran `cat wirebridge.ts`', timeAgo: '2s ago' },
+  { id: 2, location: 'San Francisco, US', icon: '🇺🇸', text: 'recruiter_sarah downloaded resume.pdf', timeAgo: '8s ago' },
+  { id: 3, location: 'Lagos, NG', icon: '🇳🇬', text: 'tolu@mbp pushed commit to RIAUM backend', timeAgo: '14s ago' },
+  { id: 4, location: 'London, UK', icon: '🇬🇧', text: 'dev_alex fetched live Open-Meteo weather', timeAgo: '21s ago' },
+  { id: 5, location: 'Berlin, DE', icon: '🇩🇪', text: 'hacker_klaus reached score 120 in Snake CLI', timeAgo: '29s ago' },
+  { id: 6, location: 'Toronto, CA', icon: '🇨🇦', text: 'engineer_marcus pinged CoinGecko ticker', timeAgo: '35s ago' },
+  { id: 7, location: 'Sydney, AU', icon: '🇦🇺', text: 'anon_99 connected to DevFlow socket', timeAgo: '42s ago' },
+];

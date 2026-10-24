@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  :root, [data-theme="green"] {
+    --term-primary: #22c55e;
+    --term-bright: #4ade80;
+    --term-dim: #166534;
+    --term-bg-subtle: rgba(34, 197, 94, 0.15);
+    --term-border: rgba(34, 197, 94, 0.4);
+    --term-glow: 0 0 15px rgba(34, 197, 94, 0.35);
+    --term-accent: #38bdf8;
+    --term-selection: rgba(34, 197, 94, 0.3);
+  }
+
+  [data-theme="amber"] {
+    --term-primary: #f59e0b;
+    --term-bright: #fbbf24;
+    --term-dim: #92400e;
+    --term-bg-subtle: rgba(245, 158, 11, 0.15);
+    --term-border: rgba(245, 158, 11, 0.4);
+    --term-glow: 0 0 15px rgba(245, 158, 11, 0.35);
+    --term-accent: #fb923c;
+    --term-selection: rgba(245, 158, 11, 0.3);
+  }
+
+  [data-theme="cyan"] {
+    --term-primary: #06b6d4;
+    --term-bright: #22d3ee;
+    --term-dim: #155e75;
+    --term-bg-subtle: rgba(6, 182, 212, 0.15);
+    --term-border: rgba(6, 182, 212, 0.4);
+    --term-glow: 0 0 15px rgba(6, 182, 212, 0.35);
+    --term-accent: #38bdf8;
+    --term-selection: rgba(6, 182, 212, 0.3);
+  }
+
+  [data-theme="dracula"] {
+    --term-primary: #a855f7;
+    --term-bright: #c084fc;
+    --term-dim: #6b21a8;
+    --term-bg-subtle: rgba(168, 85, 247, 0.15);
+    --term-border: rgba(168, 85, 247, 0.4);
+    --term-glow: 0 0 15px rgba(168, 85, 247, 0.35);
+    --term-accent: #f43f5e;
+    --term-selection: rgba(168, 85, 247, 0.3);
+  }
+
+  [data-theme="white"] {
+    --term-primary: #f4f4f5;
+    --term-bright: #ffffff;
+    --term-dim: #52525b;
+    --term-bg-subtle: rgba(244, 244, 245, 0.15);
+    --term-border: rgba(244, 244, 245, 0.3);
+    --term-glow: 0 0 15px rgba(255, 255, 255, 0.25);
+    --term-accent: #a1a1aa;
+    --term-selection: rgba(244, 244, 245, 0.25);
+  }
+
+  [data-theme="red"] {
+    --term-primary: #ef4444;
+    --term-bright: #f87171;
+    --term-dim: #991b1b;
+    --term-bg-subtle: rgba(239, 68, 68, 0.15);
+    --term-border: rgba(239, 68, 68, 0.4);
+    --term-glow: 0 0 15px rgba(239, 68, 68, 0.35);
+    --term-accent: #fb7185;
+    --term-selection: rgba(239, 68, 68, 0.3);
+  }
+
+  body {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background-color: #050507;
+    color: #e4e4e7;
+  }
+}
+
+/* Dynamic theme helper classes */
+.term-text-primary { color: var(--term-primary) !important; }
+.term-text-bright { color: var(--term-bright) !important; }
+.term-text-accent { color: var(--term-accent) !important; }
+.term-bg-primary { background-color: var(--term-primary) !important; }
+.term-bg-subtle { background-color: var(--term-bg-subtle) !important; }
+.term-border-primary { border-color: var(--term-border) !important; }
+.term-glow { box-shadow: var(--term-glow) !important; }
+.term-glow-text { text-shadow: var(--term-glow) !important; }
+
+/* Terminal Cursor Blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--term-primary, #22c55e);
+  vertical-align: middle;
+  animation: blink 1s infinite;
+}
+
+/* Terminal precision scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Subtle CRT Scanline overlay */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 3px, 6px 100%;
+}
+
+/* Mobile Touch & Tap Optimizations */
+html, body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
