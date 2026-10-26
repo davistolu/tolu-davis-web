@@ -25,8 +25,11 @@ export type DbDriver = 'postgres' | 'local_store';
 
 let activeDriver: DbDriver = 'local_store';
 let pool: pg.Pool | null = null;
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+const DATA_DIR = isServerless ? path.join('/tmp', 'data') : path.resolve(process.cwd(), 'data');
 const STORE_PATH = path.join(DATA_DIR, 'store.json');
+
+let memoryStore: LocalStoreData | null = null;
 
 interface LocalStoreData {
   profile: typeof INITIAL_PROFILE;
@@ -49,16 +52,23 @@ interface LocalStoreData {
   };
 }
 
-// Ensure local fallback store directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+// Ensure local fallback store directory exists if possible
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {
+  // Read-only filesystem in serverless, will operate in-memory
 }
 
 function readLocalStore(): LocalStoreData {
+  if (memoryStore) return memoryStore;
+
   if (fs.existsSync(STORE_PATH)) {
     try {
       const content = fs.readFileSync(STORE_PATH, 'utf-8');
-      return JSON.parse(content);
+      memoryStore = JSON.parse(content);
+      return memoryStore!;
     } catch {
       // Fallback to default
     }
@@ -78,17 +88,40 @@ function readLocalStore(): LocalStoreData {
       password_hash: defaultAdminHash
     }
   };
-  fs.writeFileSync(STORE_PATH, JSON.stringify(initialStore, null, 2), 'utf-8');
+
+  try {
+    fs.writeFileSync(STORE_PATH, JSON.stringify(initialStore, null, 2), 'utf-8');
+  } catch {
+    // Read-only filesystem, maintain in memoryStore
+  }
+  memoryStore = initialStore;
   return initialStore;
 }
 
 function writeLocalStore(data: LocalStoreData) {
-  fs.writeFileSync(STORE_PATH, JSON.stringify(data, null, 2), 'utf-8');
+  memoryStore = data;
+  try {
+    fs.writeFileSync(STORE_PATH, JSON.stringify(data, null, 2), 'utf-8');
+  } catch {
+    // Read-only filesystem, saved in memory
+  }
 }
 
 // Ensure the portfolio database exists before connecting to it
 async function ensureDatabaseExists(connectionString: string) {
   try {
+    // Managed cloud database instances manage their own databases, skip check
+    if (
+      connectionString.includes('neon.tech') ||
+      connectionString.includes('supabase.co') ||
+      connectionString.includes('pooler.supabase.com') ||
+      connectionString.includes('render.com') ||
+      connectionString.includes('railway') ||
+      process.env.VERCEL
+    ) {
+      return;
+    }
+
     const url = new URL(connectionString);
     const targetDb = url.pathname.replace(/^\//, '');
     if (!targetDb || targetDb === 'postgres') return;
@@ -127,13 +160,20 @@ export async function initDatabase(): Promise<DbDriver> {
   try {
     await ensureDatabaseExists(connectionString);
 
-    const isSslRequired = connectionString.includes('sslmode=require') || connectionString.includes('supabase') || connectionString.includes('neon');
+    const isSslRequired = connectionString.includes('sslmode=require') ||
+                          connectionString.includes('supabase') ||
+                          connectionString.includes('neon') ||
+                          connectionString.includes('render.com') ||
+                          connectionString.includes('railway') ||
+                          process.env.NODE_ENV === 'production' ||
+                          !!process.env.VERCEL;
+
     pool = new Pool({
       connectionString,
       ssl: isSslRequired ? { rejectUnauthorized: false } : undefined,
       connectionTimeoutMillis: 3500,
       idleTimeoutMillis: 30000,
-      max: 10
+      max: isServerless ? 3 : 10
     });
 
     const client = await pool.connect();
