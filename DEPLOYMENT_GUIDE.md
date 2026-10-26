@@ -68,7 +68,7 @@ You can deploy the frontend and backend as two separate services on Vercel (or f
    |---|---|---|
    | `CLIENT_URL` | `https://tolu-frontend.vercel.app` | The frontend URL from Step 1 |
    | `DATABASE_URL` | `postgresql://...` | Cloud PostgreSQL URI (Neon / Supabase) |
-   | `JWT_SECRET` | `super-secret-cyber-jwt-key-2026-toluwanimi-davis` | Token signing secret |
+   | `JWT_SECRET` | `de154b70c4baec48f18a4b48aa57d5dd787598fb610577399d70cb0f0308722e` | 256-bit cryptographic token signing secret |
    | `ADMIN_USERNAME` | `admin` | Owner username |
    | `ADMIN_PASSWORD` | `tolu-admin-2026` | Master passphrase for `~/admin.sh` |
    | `NODE_ENV` | `production` | Production mode |
