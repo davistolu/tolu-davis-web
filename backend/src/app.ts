@@ -68,6 +68,36 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', publicRoutes);
 
+// Root status endpoint
+app.get('/', (_req, res) => {
+  res.json({
+    status: 'ONLINE',
+    service: 'ToluOS Portfolio REST API Engine',
+    version: '1.0.0',
+    driver: getActiveDriver(),
+    clientUrl: CLIENT_URL,
+    endpoints: {
+      health: '/health',
+      profile: '/api/profile',
+      projects: '/api/projects',
+      skills: '/api/skills',
+      experiences: '/api/experiences',
+      faqs: '/api/faqs',
+      activities: '/api/activities'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/api', (_req, res) => {
+  res.json({
+    status: 'ONLINE',
+    service: 'ToluOS Portfolio REST API Engine',
+    driver: getActiveDriver(),
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Healthcheck endpoints
 app.get('/health', (_req, res) => {
   res.json({
